@@ -12,22 +12,34 @@
 	<dict>
 		<key>DE8236E6299DD4A3A2490192BCAD32BA12536056</key>
 		<string>https://github.com/b67416/MGD1411.git</string>
+		<key>E203ACF059A2CA3940D226D12DDCB58A6816091F</key>
+		<string>https://github.com/b67416/IAD1412.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Swimmy Fish/Swimmy Fish.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DE8236E6299DD4A3A2490192BCAD32BA12536056</key>
+		<string>../../../../MGD1411</string>
+		<key>E203ACF059A2CA3940D226D12DDCB58A6816091F</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/b67416/MGD1411.git</string>
+	<string>https://github.com/b67416/IAD1412.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DE8236E6299DD4A3A2490192BCAD32BA12536056</string>
+	<string>E203ACF059A2CA3940D226D12DDCB58A6816091F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E203ACF059A2CA3940D226D12DDCB58A6816091F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IAD1412</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
