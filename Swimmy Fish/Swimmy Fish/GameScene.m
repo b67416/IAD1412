@@ -97,7 +97,7 @@
     
     SKAction *spawnEnemy = [SKAction sequence:@[
                                                 [SKAction performSelector:@selector(spawnNewEnemy) onTarget:self],
-                                                [SKAction waitForDuration:5.0]
+                                                [SKAction waitForDuration:1.5]
                                                 ]];
     [self runAction:[SKAction repeatActionForever:spawnEnemy]];
     
@@ -116,22 +116,41 @@
 }
 
 -(void)spawnNewEnemy {
-    EnemyTurtle *newTurtle = [[EnemyTurtle alloc] initWithTurtle];
-    newTurtle.position = CGPointMake( -(gamePlayNode.position.x) + self.size.width + 100, 100);
-    [gamePlayNode addChild:newTurtle];
-    
-    EnemySwordfish *newSwordfish = [[EnemySwordfish alloc] initWithSwordfish];
-    newSwordfish.position = CGPointMake( -(gamePlayNode.position.x) + self.size.width + 100, 250);
-    [gamePlayNode addChild:newSwordfish];
-    
-    // Setup the Enemy Jelly Fish //
-    
-    EnemyJellyFish *jellyFish = [[EnemyJellyFish alloc] initWithJellyFish];
-    jellyFish.position = CGPointMake( -(gamePlayNode.position.x) + self.size.width + 100, 250);
-    [gamePlayNode addChild:jellyFish];
-
+    switch ([self getRandomNumberBetweenMinimum:1 andMaximum:4]) {
+        case 1: {
+            EnemyTurtle *newTurtle = [[EnemyTurtle alloc] initWithTurtle];
+            
+            newTurtle.position = CGPointMake( -(gamePlayNode.position.x) + self.size.width + 100,
+                                             [self getRandomNumberBetweenMinimum:newTurtle.size.height andMaximum:self.size.height - newTurtle.size.height]);
+            
+            [gamePlayNode addChild:newTurtle];
+            break;
+        }
+        
+        case 2: {
+            EnemySwordfish *newSwordfish = [[EnemySwordfish alloc] initWithSwordfish];
+            
+            newSwordfish.position = CGPointMake( -(gamePlayNode.position.x) + self.size.width + 100,
+                                                [self getRandomNumberBetweenMinimum:newSwordfish.size.height andMaximum:self.size.height - newSwordfish.size.height]);
+            
+            [gamePlayNode addChild:newSwordfish];
+            break;
+        }
+        
+        case 3:
+        case 4: {
+            EnemyJellyFish *jellyFish = [[EnemyJellyFish alloc] initWithJellyFish];
+            jellyFish.position = CGPointMake( -(gamePlayNode.position.x) + self.size.width + 100, 250);
+            [gamePlayNode addChild:jellyFish];
+            break;
+        }
+    }
 }
 
+-(NSInteger)getRandomNumberBetweenMinimum:(NSInteger)minimum andMaximum:(NSInteger)maximum
+{
+    return minimum + arc4random() % (maximum - minimum);
+}
 
 -(void)addNewSeaweed {
     Seaweed *seaweedBottom = [[Seaweed alloc] initWithSeaweedBottom];
