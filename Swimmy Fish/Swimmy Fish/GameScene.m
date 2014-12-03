@@ -11,6 +11,8 @@
 #import "CharacterMain.h"
 #import "Seaweed.h"
 #import "EnemyJellyFish.h"
+#import "EnemyTurtle.h"
+#import "EnemySwordfish.h"
 
 @implementation GameScene
 {
@@ -91,13 +93,17 @@
     
     
     
-    // Setup the seaweed //
+    // Setup the spawning of new enemy fish //
     
-    //SKAction *createSeaweed = [SKAction sequence:@[
-    //                                            [SKAction performSelector:@selector(addNewSeaweed) onTarget:self],
-    //                                            [SKAction waitForDuration:2.0]
-    //                                            ]];
-    //[self runAction:[SKAction repeatActionForever:createSeaweed]];
+    SKAction *spawnEnemy = [SKAction sequence:@[
+                                                [SKAction performSelector:@selector(spawnNewEnemy) onTarget:self],
+                                                [SKAction waitForDuration:5.0]
+                                                ]];
+    [self runAction:[SKAction repeatActionForever:spawnEnemy]];
+    
+    
+    
+    // Setup the seaweed //
     
     seaweedCurrentPosition = 0;
     [self addNewSeaweed];
@@ -109,6 +115,24 @@
     sfxSwimUp = [SKAction playSoundFileNamed:@"swim.mp3" waitForCompletion:NO];
 }
 
+-(void)spawnNewEnemy {
+    EnemyTurtle *newTurtle = [[EnemyTurtle alloc] initWithTurtle];
+    newTurtle.position = CGPointMake( -(gamePlayNode.position.x) + self.size.width + 100, 100);
+    [gamePlayNode addChild:newTurtle];
+    
+    EnemySwordfish *newSwordfish = [[EnemySwordfish alloc] initWithSwordfish];
+    newSwordfish.position = CGPointMake( -(gamePlayNode.position.x) + self.size.width + 100, 250);
+    [gamePlayNode addChild:newSwordfish];
+    
+    // Setup the Enemy Jelly Fish //
+    
+    EnemyJellyFish *jellyFish = [[EnemyJellyFish alloc] initWithJellyFish];
+    jellyFish.position = CGPointMake( -(gamePlayNode.position.x) + self.size.width + 100, 250);
+    [gamePlayNode addChild:jellyFish];
+
+}
+
+
 -(void)addNewSeaweed {
     Seaweed *seaweedBottom = [[Seaweed alloc] initWithSeaweedBottom];
     seaweedBottom.position = CGPointMake(seaweedCurrentPosition + 200, seaweedBottom.size.height / 2);
@@ -117,14 +141,6 @@
     Seaweed *seaweedTop = [[Seaweed alloc] initWithSeaweedTop];
     seaweedTop.position = CGPointMake(seaweedCurrentPosition + 400, self.view.bounds.size.height - (seaweedTop.size.height / 2));
     [gamePlayNode addChild:seaweedTop];
-    
-    
-    
-    // Setup the Enemy Jelly Fish //
-    
-    EnemyJellyFish *jellyFish = [[EnemyJellyFish alloc] initWithJellyFish];
-    jellyFish.position = CGPointMake(seaweedCurrentPosition + 100, 250);
-    [gamePlayNode addChild:jellyFish];
     
     seaweedCurrentPosition = seaweedCurrentPosition + 400;
 }
@@ -180,8 +196,8 @@
     if ((contact.bodyA.categoryBitMask == mainCharacterCategory) && (contact.bodyB.categoryBitMask == enemyCategory)) {
     
         if (characterMain.hasActions) {
-            EnemyJellyFish *contactedJellyFish = (EnemyJellyFish *)contact.bodyB.node;
-            [contactedJellyFish removeFromParent];
+            SKSpriteNode *enemyFishCollidedWith = (SKSpriteNode *)contact.bodyB.node;
+            [enemyFishCollidedWith removeFromParent];
         } else {
             // Game Over
             [self.view presentScene:[GameOverScene sceneWithSize:self.size] transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
