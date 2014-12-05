@@ -28,6 +28,9 @@
     SKLabelNode *pausedLabelNode;
     
     NSInteger cameraMovementCounter;
+    
+    SKLabelNode *playerWhackScoreLabel;
+    NSInteger playerWhackScore;
 }
 
 -(void)didMoveToView:(SKView *)view {
@@ -38,6 +41,21 @@
     gamePlayNode = [SKNode node];
     gamePlayNode.position = CGPointZero;
     [self addChild:gamePlayNode];
+    
+    
+    
+    // Setup the players score //
+    
+    playerWhackScore = 0;
+    
+    playerWhackScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Wide"];
+    playerWhackScoreLabel.text = @"Whack Score: 0";
+    playerWhackScoreLabel.fontColor = [SKColor yellowColor];
+    playerWhackScoreLabel.fontSize = 20;
+    playerWhackScoreLabel.position = CGPointMake(playerWhackScoreLabel.frame.size.width / 2, self.size.height - playerWhackScoreLabel.frame.size.height);
+    playerWhackScoreLabel.zPosition = 99;
+    [self addChild:playerWhackScoreLabel];
+    
     
     
     // Setup the Physics //
@@ -109,6 +127,8 @@
     [self addNewSeaweed];
     [self addNewSeaweed];
     [self addNewSeaweed];
+    
+    
     
     // Preload the SFX //
     
@@ -217,8 +237,11 @@
         if (characterMain.hasActions) {
             SKSpriteNode *enemyFishCollidedWith = (SKSpriteNode *)contact.bodyB.node;
             [enemyFishCollidedWith removeFromParent];
+            NSLog(@"+1 pts!");
+            playerWhackScore = playerWhackScore + 1;
         } else {
             // Game Over
+            NSLog(@"Final Score = %ld", (long)playerWhackScore);
             [self.view presentScene:[GameOverScene sceneWithSize:self.size] transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
         }
     }
@@ -240,6 +263,10 @@
         cameraMovementCounter = 0;
         [self addNewSeaweed];
     }
+}
+
+-(void)update:(NSTimeInterval)currentTime {
+    playerWhackScoreLabel.text = [NSString stringWithFormat:@"Whack Score: %ld", (long)playerWhackScore];
 }
 
 
