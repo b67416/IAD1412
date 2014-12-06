@@ -10,4 +10,6 @@
 
 @interface GameOverScene : SKScene
 
+@property NSInteger playerWhackScore;
+
 @end

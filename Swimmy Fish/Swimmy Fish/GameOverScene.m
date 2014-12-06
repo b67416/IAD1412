@@ -12,14 +12,21 @@
 @implementation GameOverScene
 
 - (void)didMoveToView:(SKView *)view {
+    NSLog(@"Score = %ld", (long)self.playerWhackScore);
+    
     SKLabelNode *gameOverLabel = [SKLabelNode labelNodeWithText:@"Game Over"];
     gameOverLabel.fontColor = [SKColor redColor];
     gameOverLabel.fontSize = 50;
-    gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+    gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 50);
     [self addChild:gameOverLabel];
     
+    NSString *playerScoreString = [NSString stringWithFormat:@"Score: %ld", (long) self.playerWhackScore];
+    SKLabelNode *playerScoreLabel = [SKLabelNode labelNodeWithText:playerScoreString];
+    playerScoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), gameOverLabel.position.y - 60);
+    [self addChild:playerScoreLabel];
+    
     SKLabelNode *retryLabel = [SKLabelNode labelNodeWithText:@"Press any touch! :-)"];
-    retryLabel.position = CGPointMake(CGRectGetMidX(self.frame), gameOverLabel.position.y - 60);
+    retryLabel.position = CGPointMake(CGRectGetMidX(self.frame), gameOverLabel.position.y - 120);
     [self addChild:retryLabel];
 }
 

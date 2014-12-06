@@ -242,7 +242,10 @@
         } else {
             // Game Over
             NSLog(@"Final Score = %ld", (long)playerWhackScore);
-            [self.view presentScene:[GameOverScene sceneWithSize:self.size] transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+            GameOverScene *gameOverScene = [GameOverScene sceneWithSize:self.size];
+            gameOverScene.playerWhackScore = playerWhackScore;
+            
+            [self.view presentScene:gameOverScene transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
         }
     }
 }
