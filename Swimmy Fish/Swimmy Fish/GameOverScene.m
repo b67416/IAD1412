@@ -7,7 +7,7 @@
 //
 
 #import "GameOverScene.h"
-#import "MainMenuScene.h"
+#import "LeaderboardScene.h"
 
 #import <Social/Social.h>
 
@@ -65,7 +65,6 @@
         for (NSDictionary *highScoreEntry in highScoresArray) {
             NSNumber *scoreNumber = [highScoreEntry objectForKey:@"score"];
 
-            NSLog(@"Found Score: %ld", (long)scoreNumber.integerValue);
             if (self.playerWhackScore > scoreNumber.integerValue) {
                 shouldAddHighScore = YES;
             }
@@ -131,16 +130,11 @@
         [highScoreArray removeObjectAtIndex:10];
     }
 
-    
-    
-    // Set the array to NSUserDefaults and quit scene
-    
-    [userDefaults setObject:highScoreArray forKey:@"highScores"];
     [self presentLeaderboardScene];
 }
 
 - (void)presentLeaderboardScene {
-    [self.view presentScene:[MainMenuScene sceneWithSize:self.size] transition:[SKTransition doorsOpenHorizontalWithDuration:.5]];
+    [self.view presentScene:[LeaderboardScene sceneWithSize:self.size] transition:[SKTransition doorsOpenHorizontalWithDuration:.5]];
 }
 
 @end
