@@ -237,11 +237,9 @@
         if (characterMain.hasActions) {
             SKSpriteNode *enemyFishCollidedWith = (SKSpriteNode *)contact.bodyB.node;
             [enemyFishCollidedWith removeFromParent];
-            NSLog(@"+1 pts!");
             playerWhackScore = playerWhackScore + 1;
         } else {
             // Game Over
-            NSLog(@"Final Score = %ld", (long)playerWhackScore);
             GameOverScene *gameOverScene = [GameOverScene sceneWithSize:self.size];
             gameOverScene.playerWhackScore = playerWhackScore;
             
