@@ -9,29 +9,43 @@
 #import "GameOverScene.h"
 #import "MainMenuScene.h"
 
+#import <Social/Social.h>
+
 @implementation GameOverScene
 
 - (void)didMoveToView:(SKView *)view {
     NSLog(@"Score = %ld", (long)self.playerWhackScore);
     
-    SKLabelNode *gameOverLabel = [SKLabelNode labelNodeWithText:@"Game Over"];
-    gameOverLabel.fontColor = [SKColor redColor];
-    gameOverLabel.fontSize = 50;
-    gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 50);
-    [self addChild:gameOverLabel];
+    SKSpriteNode *gameOverBackground = [SKSpriteNode spriteNodeWithImageNamed:@"GameOver.png"];
+    gameOverBackground.position = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    [self addChild:gameOverBackground];
     
-    NSString *playerScoreString = [NSString stringWithFormat:@"Score: %ld", (long) self.playerWhackScore];
-    SKLabelNode *playerScoreLabel = [SKLabelNode labelNodeWithText:playerScoreString];
-    playerScoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), gameOverLabel.position.y - 60);
+    SKLabelNode *playerScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Wide"];
+    playerScoreLabel.fontSize = 32;
+    playerScoreLabel.fontColor = [SKColor blackColor];
+    playerScoreLabel.text = [NSString stringWithFormat:@"%ld", (long) self.playerWhackScore];
+    playerScoreLabel.position = CGPointMake(300, 70);
     [self addChild:playerScoreLabel];
-    
-    SKLabelNode *retryLabel = [SKLabelNode labelNodeWithText:@"Press any touch! :-)"];
-    retryLabel.position = CGPointMake(CGRectGetMidX(self.frame), gameOverLabel.position.y - 120);
-    [self addChild:retryLabel];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+   // UITouch *touch = [touches anyObject];
+   // CGPoint location = [touch locationInNode:self];
+    
+   // if ([twitterButton containsPoint:location]) {
+   //     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+   //         SLComposeViewController *tweetViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+   //         [tweetViewController setInitialText:@"Swimmy Fish! rocks!!"];
+            
+   //         [self.view.window.rootViewController presentViewController:tweetViewController animated:YES completion:^{
+   //             [self presentMainMenuScene];
+   //         }];
+   //     }
+   // } else {
+
     [self.view presentScene:[MainMenuScene sceneWithSize:self.size] transition:[SKTransition doorsOpenHorizontalWithDuration:.5]];
+   
+    // }
 }
 
 @end
