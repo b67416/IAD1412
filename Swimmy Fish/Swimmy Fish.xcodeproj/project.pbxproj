@@ -27,6 +27,7 @@
 		684B14A41A395F7000F7BB49 /* Leaderboard-Button-6-10-Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684B14A01A395F7000F7BB49 /* Leaderboard-Button-6-10-Selected@2x.png */; };
 		684B14A51A395F7000F7BB49 /* Leaderboard-Button-6-10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684B14A11A395F7000F7BB49 /* Leaderboard-Button-6-10@2x.png */; };
 		684B14A71A395FD700F7BB49 /* Leaderboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684B14A61A395FD700F7BB49 /* Leaderboard@2x.png */; };
+		684B14A91A3A9A9300F7BB49 /* Twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684B14A81A3A9A9300F7BB49 /* Twitter@2x.png */; };
 		688683861A12B83900F8EC63 /* GameGraphics.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 688683851A12B83900F8EC63 /* GameGraphics.atlas */; };
 		6889B7311A14259B006C2A4A /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 6889B7301A14259B006C2A4A /* GameOverScene.m */; };
 		68A33EFD1A017C0800E60014 /* fishWhack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 68A33EFC1A017C0800E60014 /* fishWhack.mp3 */; };
@@ -83,6 +84,7 @@
 		684B14A01A395F7000F7BB49 /* Leaderboard-Button-6-10-Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Leaderboard-Button-6-10-Selected@2x.png"; sourceTree = "<group>"; };
 		684B14A11A395F7000F7BB49 /* Leaderboard-Button-6-10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Leaderboard-Button-6-10@2x.png"; sourceTree = "<group>"; };
 		684B14A61A395FD700F7BB49 /* Leaderboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Leaderboard@2x.png"; sourceTree = "<group>"; };
+		684B14A81A3A9A9300F7BB49 /* Twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twitter@2x.png"; sourceTree = "<group>"; };
 		688683851A12B83900F8EC63 /* GameGraphics.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = GameGraphics.atlas; sourceTree = "<group>"; };
 		6889B72F1A14259B006C2A4A /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		6889B7301A14259B006C2A4A /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		684B149D1A3959D500F7BB49 /* Leaderboard */ = {
 			isa = PBXGroup;
 			children = (
+				684B14A81A3A9A9300F7BB49 /* Twitter@2x.png */,
 				684B14A61A395FD700F7BB49 /* Leaderboard@2x.png */,
 				684B149E1A395F7000F7BB49 /* Leaderboard-Button-1-5-Selected@2x.png */,
 				684B149F1A395F7000F7BB49 /* Leaderboard-Button-1-5@2x.png */,
@@ -401,6 +404,7 @@
 			files = (
 				681FCFDC1A1C192100669673 /* MainMenu-Instructions@2x.png in Resources */,
 				68A33EFD1A017C0800E60014 /* fishWhack.mp3 in Resources */,
+				684B14A91A3A9A9300F7BB49 /* Twitter@2x.png in Resources */,
 				681FCFD71A1C191400669673 /* MainMenu@2x.png in Resources */,
 				68ADFDF21A1AF741000678A7 /* SplashScreen.png in Resources */,
 				681FCFDF1A1C193800669673 /* Credits@2x.png in Resources */,

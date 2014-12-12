@@ -9,8 +9,6 @@
 #import "GameOverScene.h"
 #import "LeaderboardScene.h"
 
-#import <Social/Social.h>
-
 @implementation GameOverScene
 {
     NSUserDefaults *userDefaults;
