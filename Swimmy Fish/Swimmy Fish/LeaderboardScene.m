@@ -46,6 +46,12 @@
 }
 
 - (void)didMoveToView:(SKView *)view {
+    [self setupLocalLeaderBoard];
+}
+
+- (void)setupLocalLeaderBoard {
+    
+    
     // Setup Leaderboard Background //
     
     SKSpriteNode *leaderboardBackground = [SKSpriteNode spriteNodeWithImageNamed:@"Leaderboard"];

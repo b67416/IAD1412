@@ -9,6 +9,8 @@
 #import "GameOverScene.h"
 #import "LeaderboardScene.h"
 
+#import <GameKit/GameKit.h>
+
 @implementation GameOverScene
 {
     NSUserDefaults *userDefaults;
@@ -28,20 +30,28 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-   // UITouch *touch = [touches anyObject];
-   // CGPoint location = [touch locationInNode:self];
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
     
-   // if ([twitterButton containsPoint:location]) {
-   //     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-   //         SLComposeViewController *tweetViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-   //         [tweetViewController setInitialText:@"Swimmy Fish! rocks!!"];
+    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error) {
+        if (viewController != nil) {
+            [self.view.window.rootViewController presentViewController:viewController animated:YES completion:nil];
+        } else if (localPlayer.isAuthenticated) {
+            NSLog(@"Game Center Logged in");
+            GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"topscores"];
+            score.value = self.playerWhackScore;
             
-   //         [self.view.window.rootViewController presentViewController:tweetViewController animated:YES completion:^{
-   //             [self presentMainMenuScene];
-   //         }];
-   //     }
-   // } else {
+            [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+                NSLog(@"Score sent to game center!");
+            }];
+            
+        } else {
+            NSLog(@"Game Center Unavailable - %@", error);
+            [self saveLocalLeaderboardScore];
+        }
+    };
+}
 
+- (void)saveLocalLeaderboardScore {
     
     // Prep for NSUserDefaults //
     
