@@ -8,6 +8,7 @@
 
 #import "GameOverScene.h"
 #import "LeaderboardScene.h"
+#import "MainMenuScene.h"
 
 #import <GameKit/GameKit.h>
 
@@ -42,6 +43,14 @@
             
             [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
                 NSLog(@"Score sent to game center!");
+                
+                GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc] init];
+                if (gameCenterViewController != nil) {
+                gameCenterViewController.gameCenterDelegate = self;
+                gameCenterViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+                [self.view.window.rootViewController presentViewController:gameCenterViewController animated:YES completion:nil];
+                }
+                
             }];
             
         } else {
@@ -143,6 +152,14 @@
 
 - (void)presentLeaderboardScene {
     [self.view presentScene:[LeaderboardScene sceneWithSize:self.size] transition:[SKTransition doorsOpenHorizontalWithDuration:.5]];
+}
+
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController*)gameCenterViewController {
+    
+    UIViewController *vc = self.view.window.rootViewController;
+    [vc dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.view presentScene:[MainMenuScene sceneWithSize:self.size] transition:[SKTransition doorsCloseHorizontalWithDuration:.5]];
 }
 
 @end
