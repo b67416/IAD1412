@@ -10,6 +10,7 @@
 #import "GameScene.h"
 #import "CreditsScene.h"
 #import "InstructionsScene.h"
+#import <GameKit/GameKit.h>
 
 @implementation MainMenuScene
 {
@@ -34,6 +35,13 @@
     buttonPlay = [SKSpriteNode spriteNodeWithImageNamed:@"MainMenu-Play.png"];
     buttonPlay.position = CGPointMake(self.view.frame.size.width - (buttonPlay.size.width / 2) - 30, 190);
     [self addChild:buttonPlay];
+
+    [GKLocalPlayer localPlayer].authenticateHandler = ^(UIViewController *viewController, NSError *error) {
+        if (viewController != nil) {
+            [self.view.window.rootViewController presentViewController:viewController animated:YES completion:nil];
+        }
+    };
+
 }
 
 

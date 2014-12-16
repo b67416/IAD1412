@@ -31,33 +31,25 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-    
-    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error) {
-        if (viewController != nil) {
-            [self.view.window.rootViewController presentViewController:viewController animated:YES completion:nil];
-        } else if (localPlayer.isAuthenticated) {
-            NSLog(@"Game Center Logged in");
-            GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"topscores"];
-            score.value = self.playerWhackScore;
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"topscores"];
+        score.value = self.playerWhackScore;
+        
+        [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+            GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc] init];
             
-            [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
-                NSLog(@"Score sent to game center!");
-                
-                GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc] init];
-                if (gameCenterViewController != nil) {
+            if (gameCenterViewController != nil) {
                 gameCenterViewController.gameCenterDelegate = self;
                 gameCenterViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-                [self.view.window.rootViewController presentViewController:gameCenterViewController animated:YES completion:nil];
-                }
                 
-            }];
-            
-        } else {
-            NSLog(@"Game Center Unavailable - %@", error);
-            [self saveLocalLeaderboardScore];
-        }
-    };
+                [self.view.window.rootViewController presentViewController:gameCenterViewController animated:YES completion:nil];
+            }
+        }];
+    } else {
+        [self saveLocalLeaderboardScore];
+    }
+    
+    
 }
 
 - (void)saveLocalLeaderboardScore {
