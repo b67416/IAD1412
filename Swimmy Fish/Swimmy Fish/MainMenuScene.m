@@ -36,12 +36,43 @@
     buttonPlay.position = CGPointMake(self.view.frame.size.width - (buttonPlay.size.width / 2) - 30, 190);
     [self addChild:buttonPlay];
 
+    
+    // Log in to game center if able //
+    
     [GKLocalPlayer localPlayer].authenticateHandler = ^(UIViewController *viewController, NSError *error) {
         if (viewController != nil) {
             [self.view.window.rootViewController presentViewController:viewController animated:YES completion:nil];
         }
     };
 
+    
+    
+    // Check to see if user played 2 days in a row, if so, then award measurement achievement
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDate *lastPlayedDate = [userDefaults objectForKey:@"achievement_lastPlayedDate"];
+    NSDate *nowDate = [[NSDate alloc] init];
+    
+    if (lastPlayedDate == nil) {
+        [userDefaults setObject:nowDate forKey:@"achievement_lastPlayedDate"];
+    } else {
+        NSNumber *daysSince = [NSNumber numberWithFloat:[nowDate timeIntervalSinceDate:lastPlayedDate] / 60 / 60 / 24];
+        
+        if (daysSince.integerValue == 2) {
+            // User played for two days in a row! //
+            NSLog(@"Achievment Awarded: Played for two days in a row");
+            
+            GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:@"two_days_in_row"];
+            achievement.percentComplete = 100.0;
+            achievement.showsCompletionBanner = true;
+            
+            [GKAchievement reportAchievements:@[achievement] withCompletionHandler:nil];
+        } else if (daysSince.integerValue > 2) {
+            // Too many days have passed, reset play date to now //
+            [userDefaults setObject:nowDate forKey:@"achievement_lastPlayedDate"];
+        }
+    }
 }
 
 

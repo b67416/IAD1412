@@ -31,6 +31,83 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    // Give the no score or scored once achievements //
+    
+    if (self.playerWhackScore == 0) {
+        GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:@"no_score"];
+        achievement.percentComplete = 100.0;
+        achievement.showsCompletionBanner = true;
+        
+        [GKAchievement reportAchievements:@[achievement] withCompletionHandler:nil];
+    } else {
+        GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:@"score_once"];
+        achievement.percentComplete = 100.0;
+        achievement.showsCompletionBanner = true;
+        
+        [GKAchievement reportAchievements:@[achievement] withCompletionHandler:nil];
+    }
+    
+    
+    
+    // Check for number of times with score more than 10 and apply achievments if so //
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSNumber *playsWithScoreNumber = [defaults objectForKey:@"number_of_plays_greater_than_10"];
+    NSInteger playsWithScoreInteger = 0;
+    
+    if (playsWithScoreNumber == nil) {
+        playsWithScoreInteger = 0;
+    } else {
+        playsWithScoreInteger = playsWithScoreNumber.integerValue;
+    }
+    
+    if (self.playerWhackScore > 10) {
+        // Player scored more than 10 so increment the counter and apply achievment if required //
+        
+        playsWithScoreInteger = playsWithScoreInteger + 1;
+        
+        if (playsWithScoreInteger == 6) {
+            GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:@"six_x_greater_ten"];
+            achievement.percentComplete = 100.0;
+            achievement.showsCompletionBanner = true;
+            
+            [GKAchievement reportAchievements:@[achievement] withCompletionHandler:nil];
+            
+            playsWithScoreInteger = 0;
+        } else if (playsWithScoreInteger == 4) {
+            GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:@"four_x_greater_ten"];
+            achievement.percentComplete = 100.0;
+            achievement.showsCompletionBanner = true;
+            
+            [GKAchievement reportAchievements:@[achievement] withCompletionHandler:nil];
+
+            playsWithScoreInteger = 0;
+        } else if (playsWithScoreInteger == 2) {
+            GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:@"two_x_greater_ten"];
+            achievement.percentComplete = 100.0;
+            achievement.showsCompletionBanner = true;
+            
+            [GKAchievement reportAchievements:@[achievement] withCompletionHandler:nil];
+ 
+            playsWithScoreInteger = 0;
+        }
+    } else {
+        // Player didn't score more than 10, so reset the counter //
+        
+        playsWithScoreInteger = 0;
+    }
+    
+    NSLog(@"playsWithScoreInteger = %ld", (long)playsWithScoreInteger);
+    playsWithScoreNumber = [NSNumber numberWithInteger:playsWithScoreInteger];
+    [defaults setObject:playsWithScoreNumber forKey:@"number_of_plays_greater_than_10"];
+    [defaults synchronize];
+    
+    
+    
+    // Post to game center leaderboard or post to local leaderboards //
+    
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
         GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"topscores"];
         score.value = self.playerWhackScore;
