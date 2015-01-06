@@ -19,7 +19,7 @@
 
 - (void)didMoveToView:(SKView *)view {
     SKSpriteNode *gameOverBackground = [SKSpriteNode spriteNodeWithImageNamed:@"GameOver.png"];
-    gameOverBackground.position = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    gameOverBackground.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:gameOverBackground];
     
     SKLabelNode *playerScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"MarkerFelt-Wide"];

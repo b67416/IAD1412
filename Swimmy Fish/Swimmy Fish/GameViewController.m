@@ -11,9 +11,9 @@
 
 @implementation GameViewController
 
-- (void)viewDidLoad
+- (void)viewWillLayoutSubviews
 {
-    [super viewDidLoad];
+    [super viewWillLayoutSubviews];
 
     // Configure the view.
     SKView * skView = (SKView *)self.view;
@@ -23,7 +23,9 @@
     skView.ignoresSiblingOrder = YES;
     
     // Create and configure the scene.
-    MainMenuScene *scene = [MainMenuScene sceneWithSize:self.view.bounds.size];
+    //MainMenuScene *scene = [MainMenuScene sceneWithSize:self.view.bounds.size];
+    MainMenuScene *scene = [MainMenuScene sceneWithSize:CGSizeMake(568, 320)];
+    
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.

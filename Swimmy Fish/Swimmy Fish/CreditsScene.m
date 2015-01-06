@@ -16,11 +16,11 @@
 
 - (void)didMoveToView:(SKView *)view {
     SKSpriteNode *backgroundSprite = [SKSpriteNode spriteNodeWithImageNamed:@"Credits.png"];
-    backgroundSprite.position = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    backgroundSprite.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:backgroundSprite];
     
     buttonReturn = [SKSpriteNode spriteNodeWithImageNamed:@"Credits_Button.png"];
-    buttonReturn.position = CGPointMake(self.view.frame.size.width - (buttonReturn.size.width / 2) - 30, 50);
+    buttonReturn.position = CGPointMake(self.frame.size.width - (buttonReturn.size.width / 2) - 30, 50);
     [self addChild:buttonReturn];
 }
 

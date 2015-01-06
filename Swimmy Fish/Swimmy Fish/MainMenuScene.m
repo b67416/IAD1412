@@ -21,19 +21,19 @@
 
 - (void)didMoveToView:(SKView *)view {
     SKSpriteNode *mainMenuBackgroundSprite = [SKSpriteNode spriteNodeWithImageNamed:@"MainMenu.png"];
-    mainMenuBackgroundSprite.position = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    mainMenuBackgroundSprite.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:mainMenuBackgroundSprite];
     
     buttonCredits = [SKSpriteNode spriteNodeWithImageNamed:@"MainMenu-Credits.png"];
-    buttonCredits.position = CGPointMake(self.view.frame.size.width - (buttonCredits.size.width / 2) - 30, 50);
+    buttonCredits.position = CGPointMake(self.frame.size.width - (buttonCredits.size.width / 2) - 30, 50);
     [self addChild:buttonCredits];
     
     buttonInstructions = [SKSpriteNode spriteNodeWithImageNamed:@"MainMenu-Instructions.png"];
-    buttonInstructions.position = CGPointMake(self.view.frame.size.width - (buttonCredits.size.width / 2) - 30, 120);
+    buttonInstructions.position = CGPointMake(self.frame.size.width - (buttonInstructions.size.width / 2) - 30, 120);
     [self addChild:buttonInstructions];
     
     buttonPlay = [SKSpriteNode spriteNodeWithImageNamed:@"MainMenu-Play.png"];
-    buttonPlay.position = CGPointMake(self.view.frame.size.width - (buttonPlay.size.width / 2) - 30, 190);
+    buttonPlay.position = CGPointMake(self.frame.size.width - (buttonPlay.size.width / 2) - 30, 190);
     [self addChild:buttonPlay];
 
     

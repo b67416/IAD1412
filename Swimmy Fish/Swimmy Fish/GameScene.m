@@ -65,13 +65,13 @@
     
     SKNode *worldBottomBoundryNode = [SKNode node];
     worldBottomBoundryNode.position = CGPointZero;
-    worldBottomBoundryNode.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, 10) toPoint:CGPointMake(self.size.width, 10)];
+    worldBottomBoundryNode.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, 10) toPoint:CGPointMake(self.frame.size.width, 10)];
     worldBottomBoundryNode.physicsBody.categoryBitMask = seaweedCategory;
     [self addChild:worldBottomBoundryNode];
     
     SKNode *worldTopBoundryNode = [SKNode node];
     worldTopBoundryNode.position = CGPointZero;
-    worldTopBoundryNode.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, self.size.height - 10) toPoint:CGPointMake(self.size.width, self.size.height - 10)];
+    worldTopBoundryNode.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, self.size.height - 10) toPoint:CGPointMake(self.frame.size.width, self.frame.size.height - 10)];
     worldTopBoundryNode.physicsBody.categoryBitMask = seaweedCategory;
     [self addChild:worldTopBoundryNode];
     
@@ -178,7 +178,7 @@
     [gamePlayNode addChild:seaweedBottom];
     
     Seaweed *seaweedTop = [[Seaweed alloc] initWithSeaweedTop];
-    seaweedTop.position = CGPointMake(seaweedCurrentPosition + 400, self.view.bounds.size.height - (seaweedTop.size.height / 2));
+    seaweedTop.position = CGPointMake(seaweedCurrentPosition + 400, self.frame.size.height - (seaweedTop.size.height / 2));
     [gamePlayNode addChild:seaweedTop];
     
     seaweedCurrentPosition = seaweedCurrentPosition + 400;

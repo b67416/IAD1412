@@ -55,7 +55,7 @@
     // Setup Leaderboard Background //
     
     SKSpriteNode *leaderboardBackground = [SKSpriteNode spriteNodeWithImageNamed:@"Leaderboard"];
-    leaderboardBackground.position = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    leaderboardBackground.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:leaderboardBackground];
 
     
@@ -224,7 +224,7 @@
     highScoresArray = [userDefaults arrayForKey:@"highScores"];
     NSInteger scoreIndex = 0;
     
-    NSLog(@"array count = %ld", highScoresArray.count);
+    //NSLog(@"array count = %ld", highScoresArray.count);
     
     for (NSDictionary *scoreEntry in highScoresArray) {
         scoreIndex++;

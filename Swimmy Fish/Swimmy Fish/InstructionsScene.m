@@ -14,7 +14,7 @@
 
 - (void)didMoveToView:(SKView *)view {
     SKSpriteNode *backgroundSprite = [SKSpriteNode spriteNodeWithImageNamed:@"Instructions.png"];
-    backgroundSprite.position = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    backgroundSprite.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     [self addChild:backgroundSprite];
 }
 
